@@ -8,7 +8,7 @@ interface Props {
     iconUrl?: string,
 }
 
-const Avatar = ({ isUser = false, dimension = 30, iconUrl = '' }: Props) => {
+const Avatar = ({ isUser = false, dimension = 25, iconUrl = '' }: Props) => {
     return (
         <div className='relative text-lg'>
             {
@@ -18,6 +18,7 @@ const Avatar = ({ isUser = false, dimension = 30, iconUrl = '' }: Props) => {
                         alt="user avatar"
                         width={dimension}
                         height={dimension}
+                        className="rounded-full"
                     />
                     :
                     <FaUserAlt />

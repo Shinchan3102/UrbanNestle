@@ -6,6 +6,7 @@ const layout = ({
 }: {
     children: React.ReactNode
 }) => {
+    
     return (
         <div className='flex flex-1'>
             <div className='hidden md:block h-full'>

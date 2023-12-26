@@ -11,11 +11,11 @@ import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
+import { signIn } from 'next-auth/react';
 
 
 const page = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -45,7 +45,7 @@ const page = () => {
             <div className='flex flex-col gap-3 text-sm'>
                 <CustomButton
                     btnText='Sign In with Google'
-                    onClick={() => { }}
+                    onClick={() => { signIn('google') }}
                     hasIcon
                     Icon={FcGoogle}
                     isVisible
@@ -63,9 +63,9 @@ const page = () => {
             </div>
 
             <div className='flex gap-2 items-center text-xs text-neutral-500'>
-                <hr className='flex-1'/>
-                <span>or sign in by email</span>
-                <hr className='flex-1'/>
+                <hr className='flex-1' />
+                <span>or sign up by email</span>
+                <hr className='flex-1' />
             </div>
 
             <form className='max-w-sm min-w-[330px] flex flex-col gap-4'>
