@@ -6,7 +6,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 interface Props {
     btnText: string
-    onClick: () => void
+    onClick: (e:any) => void
     variant?: 'default' | 'ghost'
     hasIcon?: boolean
     Icon?: IconType
