@@ -68,7 +68,7 @@ const page = () => {
                     isVisible
                     variant='ghost'
                 />
-                <CustomButton
+                {/* <CustomButton
                     btnText='Sign In with Facebook'
                     onClick={() => { }}
                     hasIcon
@@ -76,7 +76,7 @@ const page = () => {
                     isVisible
                     variant='ghost'
                     iconColor={'text-blue-500'}
-                />
+                /> */}
             </div>
 
             <div className='flex gap-2 items-center text-xs text-neutral-500'>

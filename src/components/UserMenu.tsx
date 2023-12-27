@@ -8,6 +8,7 @@ import { User } from "@prisma/client";
 import Link from "next/link";
 import { menuItems } from "@/utils/constants";
 import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Props {
     currentUser?: User | null;
@@ -16,15 +17,25 @@ interface Props {
 
 const UserMenu = ({ currentUser }: Props) => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const router = useRouter();
 
     const handleToggleOpen = useCallback(() => {
         setIsOpen((prev) => !prev);
     }, []);
 
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+            return router.push('/sign-in');
+        }
+
+        return router.push('/rent');
+
+    }, [currentUser]);
+
     return (
         <div className='relative'>
             <div className='flex flex-row gap-3 items-center'>
-                <div className='hidden font-medium md:block text-sm px-4 py-2 rounded-full hover:bg-neutral-100  transition cursor-pointer'>
+                <div onClick={onRent} className='hidden font-medium md:block text-sm px-4 py-2 rounded-full hover:bg-neutral-100  transition cursor-pointer'>
                     UrbanNestle your home
                 </div>
                 <div className='flex flex-row border-[1px] border-neutral-200 transition rounded-full p-1 py-0.5 items-center cursor-pointer'>
@@ -54,7 +65,7 @@ const UserMenu = ({ currentUser }: Props) => {
             </div>
             {
                 isOpen &&
-                <div className="absolute rounded-md w-[200px] shadow-md bg-white overflow-hidden right-0 top-12 text-sm">
+                <div className="absolute z-20 rounded-md min-w-[200px] shadow-md bg-white overflow-hidden right-0 top-12 text-sm">
                     <div className="flex flex-col cursor-pointer">
                         {
                             menuItems.map((item) => (
@@ -65,6 +76,9 @@ const UserMenu = ({ currentUser }: Props) => {
                                 />
                             ))
                         }
+                        <div className="p-2 px-4 hover:bg-neutral-100 transition" onClick={onRent}>
+                            UrbanNestle your home
+                        </div>
                         <hr />
                         <div className="p-2 px-4 hover:bg-red-500 transition hover:text-white" onClick={() => signOut()}>
                             Logout

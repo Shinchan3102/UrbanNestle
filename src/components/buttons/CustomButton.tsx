@@ -13,16 +13,18 @@ interface Props {
     isVisible?: boolean
     isLoading?: boolean
     iconColor?: string
+    disabled?: boolean
 }
 
-const CustomButton = ({ btnText, onClick, variant = 'default', hasIcon = false, isVisible = false, Icon = AiOutlineLoading3Quarters, isLoading = false, iconColor='' }: Props) => {
+const CustomButton = ({ btnText, onClick, variant = 'default', hasIcon = false, isVisible = false, Icon = AiOutlineLoading3Quarters, isLoading = false, iconColor='', disabled=false }: Props) => {
     return (
         <button
             className={`flex w-full items-center gap-2 justify-center py-2 px-4 rounded-md
-        ${variant === 'default' && 'bg-black hover:bg-black/90 text-white'} 
-        ${variant === 'ghost' && 'border text-black transition hover:border-black'}
+        ${variant === 'default' && 'bg-black transition hover:bg-black/90 disabled:bg-black/50 text-white hover:shadow-sm'} 
+        ${variant === 'ghost' && 'border text-black transition hover:border-black hover:shadow-sm'}
         `}
             onClick={onClick}
+            disabled={disabled}
         >
             {
                 isVisible && hasIcon &&

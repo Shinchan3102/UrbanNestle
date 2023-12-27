@@ -10,7 +10,7 @@ interface Props {
 const Navbar = ({ currentUser }: Props) => {
     // console.log(currentUser);
     return (
-        <div className='fixed w-full bg-white z-10 shadow-sm border-b-[0.5px]'>
+        <div className='fixed w-full bg-white z-20 shadow-sm border-b-[0.5px]'>
             <div className='main-container mx-auto py-4 flex flex-row items-center justify-between gap-4'>
                 <div className='hidden sm:block'>
                     <Logo />
