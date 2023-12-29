@@ -30,7 +30,7 @@ const UserMenu = ({ currentUser }: Props) => {
 
         return router.push('/rent');
 
-    }, [currentUser]);
+    }, [currentUser, router]);
 
     return (
         <div className='relative'>

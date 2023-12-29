@@ -19,9 +19,9 @@ const SearchModal = () => {
         startDate: new Date(), endDate: new Date(), key: 'selection'
     });
 
-    const Map = useMemo(() => dynamic(() => import('@/components/Map'), {
-        ssr: false
-    }), [location]);
+    // const Map = useMemo(() => dynamic(() => import('@/components/Map'), {
+    //     ssr: false
+    // }), [location]);
     
     return (
         <div>
