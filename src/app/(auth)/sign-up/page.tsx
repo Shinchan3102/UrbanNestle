@@ -10,7 +10,6 @@ import { FaUser } from "react-icons/fa";
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
-import { SiFacebook } from "react-icons/si";
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 

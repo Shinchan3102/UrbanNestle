@@ -7,7 +7,6 @@ import CategoryCard from "@/components/cards/CategoryCard";
 import CountryCard, { CountrySelectValue } from "@/components/cards/CountryCard";
 import ImageUpload from "@/components/inputs/ImageUpload";
 import Input from "@/components/inputs/Input";
-import Input2 from "@/components/inputs/Input2";
 import SearchInput from "@/components/inputs/SearchInput";
 import { formattedCountries } from "@/hooks/useCountries";
 import { categories, rentingSteps } from "@/utils/constants";

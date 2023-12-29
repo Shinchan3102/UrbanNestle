@@ -1,4 +1,5 @@
 'use client'
+
 import CustomButton from '@/components/buttons/CustomButton';
 import Input from '@/components/inputs/Input';
 import { useEffect, useState } from 'react';
