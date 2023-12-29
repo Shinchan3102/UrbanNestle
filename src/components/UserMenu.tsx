@@ -38,7 +38,7 @@ const UserMenu = ({ currentUser }: Props) => {
                 <div onClick={onRent} className='hidden font-medium md:block text-sm px-4 py-2 rounded-full hover:bg-neutral-100  transition cursor-pointer'>
                     UrbanNestle your home
                 </div>
-                <div className='flex flex-row border-[1px] border-neutral-200 transition rounded-full p-1 py-0.5 items-center cursor-pointer'>
+                <div className={`flex flex-row ${currentUser && 'md:border-[1px]'} border-neutral-200 transition rounded-full p-1 py-0.5 items-center cursor-pointer`}>
                     {
                         currentUser ?
                             <>
@@ -57,7 +57,10 @@ const UserMenu = ({ currentUser }: Props) => {
                                 href={'/sign-in'}
                                 className="rounded-full hover:bg-neutral-100 p-1.5"
                             >
-                                <Avatar />
+                                <Avatar
+                                    isUser={true}
+                                    iconUrl={'/user.png'}
+                                />
                             </Link>
                     }
                 </div>
@@ -66,7 +69,7 @@ const UserMenu = ({ currentUser }: Props) => {
             {
                 isOpen &&
                 <div className="absolute z-20 rounded-md min-w-[200px] shadow-md bg-white overflow-hidden right-0 top-12 text-sm">
-                    <div className="flex flex-col cursor-pointer">
+                    <div className="flex flex-col cursor-pointer" onClick={handleToggleOpen}>
                         {
                             menuItems.map((item) => (
                                 <MenuItem

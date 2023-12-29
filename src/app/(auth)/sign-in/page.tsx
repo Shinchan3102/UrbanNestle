@@ -18,7 +18,7 @@ const page = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const router = useRouter();
 
-    
+
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -40,6 +40,7 @@ const page = () => {
             }
             else if (res?.ok) {
                 toast.success('logged in successfully!');
+                router.refresh();
                 router.push('/');
             }
 
@@ -51,7 +52,7 @@ const page = () => {
         }
     }
 
-    
+
 
     return (
         <div className='flex flex-col gap-4 border p-6 rounded-xl pb-10 mx-4'>
@@ -59,14 +60,15 @@ const page = () => {
                 Welcome back!
             </h1>
 
-            <div className='flex flex-col gap-3 text-sm'>
+            <div className='flex flex-col gap-3'>
                 <CustomButton
                     btnText='Sign In with Google'
-                    onClick={() => { signIn('google')}}
+                    onClick={() => { signIn('google'); router.refresh(); router.push('/') }}
                     hasIcon
                     Icon={FcGoogle}
                     isVisible
                     variant='ghost'
+                    isLarge
                 />
                 {/* <CustomButton
                     btnText='Sign In with Facebook'

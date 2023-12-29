@@ -12,10 +12,12 @@ import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
 import { SiFacebook } from "react-icons/si";
 import { signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 
 const page = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
 
     const { register, handleSubmit, formState: { errors } } = useForm<FieldValues>({
         defaultValues: {
@@ -28,7 +30,9 @@ const page = () => {
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true);
         try {
-            await axios.post(`/api/register`, data);
+            const res = await axios.post(`/api/register`, data);
+            if (res.status === 200)
+                router.push('/');
         } catch (error: any) {
             toast.error(`Something went wrong ${error?.message}`)
         } finally {
@@ -42,10 +46,10 @@ const page = () => {
                 Sign Up for City Comfort
             </h1>
 
-            <div className='flex flex-col gap-3 text-sm'>
+            <div className='flex flex-col gap-3'>
                 <CustomButton
                     btnText='Sign In with Google'
-                    onClick={() => { signIn('google') }}
+                    onClick={() => { signIn('google'); router.push('/') }}
                     hasIcon
                     Icon={FcGoogle}
                     isVisible

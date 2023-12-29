@@ -8,7 +8,7 @@ interface Props {
     iconUrl?: string,
 }
 
-const Avatar = ({ isUser = false, dimension = 25, iconUrl = '' }: Props) => {
+const Avatar = ({ isUser = false, dimension = 25, iconUrl = '/user.png' }: Props) => {
     return (
         <div className='relative text-lg'>
             {

@@ -4,11 +4,10 @@ import useCountries from "@/hooks/useCountries"
 import { Listing, Reservation, User } from "@prisma/client"
 import { format } from "date-fns"
 import Image from "next/image"
-import Link from "next/link"
-import { useRouter } from "next/router"
 import React, { useCallback, useMemo } from "react"
 import LikeButton from "../buttons/LikeButton"
 import CustomButton from "../buttons/CustomButton"
+import { useRouter } from "next/navigation"
 
 interface Props {
     data: Listing
@@ -21,7 +20,7 @@ interface Props {
 }
 
 const ListingCard = ({ data, reservation, onAction, actionId = '', actionLabel, currentUser, disabled }: Props) => {
-    // const router = useRouter();
+    const router = useRouter();
 
     const { getByValue } = useCountries();
 
@@ -55,11 +54,11 @@ const ListingCard = ({ data, reservation, onAction, actionId = '', actionLabel, 
     }, [reservation]);
 
     return (
-        <Link
-            href={`/listings/${data.id}`}
-            className="group flex flex-col"
+        <div
+            onClick={() => { router.push(`/listings/${data.id}`) }}
+            className="group flex flex-col relative cursor-pointer"
         >
-            <div className="aspect-square w-full relative overflow-hidden rounded-xl">
+            <div className="aspect-square w-full relative z-0 overflow-hidden rounded-xl">
                 <Image
                     src={data.imageSrc}
                     alt={data.title}
@@ -67,12 +66,15 @@ const ListingCard = ({ data, reservation, onAction, actionId = '', actionLabel, 
                     className="object-cover transition group-hover:scale-110"
                 />
 
-                <div className="absolute top-2 right-2">
-                    <LikeButton
-                        listingId={data.id}
-                        currentUser={currentUser}
-                    />
-                </div>
+                {
+                    !reservation &&
+                    <div className="absolute z-10 top-2 right-2">
+                        <LikeButton
+                            listingId={data.id}
+                            currentUser={currentUser}
+                        />
+                    </div>
+                }
             </div>
             <h2 className="font-medium text-lg">
                 {location?.region}, {location?.label}
@@ -80,7 +82,7 @@ const ListingCard = ({ data, reservation, onAction, actionId = '', actionLabel, 
             <h4 className="text-sm text-neutral-500">
                 {reservationDate || data.category}
             </h4>
-            <div className="flex items-center gap-1 text-sm">
+            <div className="flex items-center gap-1 text-sm mb-3">
                 <div className="font-medium">
                     $ {price}
                 </div>
@@ -96,12 +98,16 @@ const ListingCard = ({ data, reservation, onAction, actionId = '', actionLabel, 
                 onAction && actionLabel && (
                     <CustomButton
                         disabled={disabled}
+                        variant="destructionOutline"
                         onClick={handleCancel}
                         btnText={actionLabel}
+                        isLoading={disabled}
+                        isVisible={disabled}
+                        hasIcon
                     />
                 )
             }
-        </Link>
+        </div>
     )
 }
 

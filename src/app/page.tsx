@@ -3,12 +3,16 @@ import Categories from '@/components/Categories'
 import Empty from '@/components/Empty';
 import ListingCard from '@/components/cards/ListingCard';
 import { getCurrentUser } from '@/libs/actions/getCurrentUser';
-import { getListings } from '@/libs/actions/listings-actions';
+import { IListingParams, getListings } from '@/libs/actions/listings-actions';
 
-export default async function Home() {
+interface Params {
+  searchParams: IListingParams
+}
+
+export default async function Home({ searchParams }: Params) {
   // const isEmpty = true;
 
-  const listings = await getListings();
+  const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
   return (
@@ -23,7 +27,7 @@ export default async function Home() {
           :
           <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-6'>
             {
-              listings.map((item) => (
+              listings?.map((item) => (
                 <ListingCard
                   key={item.id}
                   currentUser={currentUser}

@@ -1,6 +1,8 @@
 'use client'
 
+import useFavorite from "@/hooks/useFavorite"
 import { User } from "@prisma/client"
+import React from "react"
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai"
 
 interface Props {
@@ -9,14 +11,14 @@ interface Props {
 }
 
 const LikeButton = ({ listingId, currentUser }: Props) => {
-    const hasLiked = true;
+    const { hasFavorited, toggleFavorite } = useFavorite({
+        listingId,
+        currentUser
+    });
 
-    const toggleLike = () => {
-
-    }
     return (
-        <div onClick={toggleLike} className="relative hover:opacity-80 transition cursor-pointer">
-            <AiFillHeart size={28} className={` ${hasLiked ? 'fill-red-500' : 'fill-white'}`} />
+        <div onClick={(e:React.MouseEvent<HTMLDivElement>)=>{e.stopPropagation();toggleFavorite()}} className="relative hover:opacity-80 transition cursor-pointer">
+            <AiFillHeart size={28} className={` ${hasFavorited ? 'fill-red-500' : 'fill-white'}`} />
         </div>
     )
 }

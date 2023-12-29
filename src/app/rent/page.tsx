@@ -86,6 +86,7 @@ const page = () => {
             if (res.status === 200) {
                 toast.success('successfully added listing!');
                 router.push('/');
+                router.refresh();
                 reset();
             }
 

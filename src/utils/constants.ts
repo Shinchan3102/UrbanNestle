@@ -10,19 +10,19 @@ import { BiSolidDetail } from 'react-icons/bi';
 export const menuItems = [
     {
         name: 'My trips',
-        redirectTo: '/'
+        redirectTo: '/trips'
     },
     {
         name: 'My favorites',
-        redirectTo: '/'
+        redirectTo: '/favorites'
     },
     {
         name: 'My reservations',
-        redirectTo: '/'
+        redirectTo: '/reservations'
     },
     {
         name: 'My properties',
-        redirectTo: '/'
+        redirectTo: '/properties'
     },
 ];
 
