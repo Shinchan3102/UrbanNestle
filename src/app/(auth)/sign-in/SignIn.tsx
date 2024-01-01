@@ -9,8 +9,10 @@ import { MdKey } from "react-icons/md";
 import toast from 'react-hot-toast';
 import Link from 'next/link';
 import { FcGoogle } from "react-icons/fc";
-import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { signIn } from '@/auth';
+import { LoginSchema } from '@/auth.config';
+import { login } from '@/libs/actions/user-actions';
 
 
 const SignIn = () => {
@@ -27,18 +29,17 @@ const SignIn = () => {
     const onSubmit: SubmitHandler<FieldValues> = async (data) => {
         setIsLoading(true);
         try {
-            const res = await signIn('credentials', {
-                ...data,
-                redirect: false
-            })
+            const validatedField = LoginSchema.safeParse(data);
+            if (!validatedField.success) return toast.error('not correct');
+            const { email, password } = validatedField.data;
+          
+            const res: any = await login({ email, password })
 
             if (res?.error) {
                 toast.error('Invalid credentials');
             }
-            else if (res?.ok) {
+            else if (res?.status===200) {
                 toast.success('logged in successfully!');
-                router.refresh();
-                router.push('/');
             }
 
         } catch (error: any) {
