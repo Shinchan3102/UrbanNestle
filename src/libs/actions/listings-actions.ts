@@ -3,16 +3,62 @@ import { getCurrentUser } from "./getCurrentUser";
 
 export interface IListingParams {
     userId?: string
+    guestCount?: number
+    roomCount?: number
+    bathroomCount?: number
+    startDate?: string
+    endDate?: string
+    locationValue?: string
+    category?: string
 }
 
 export async function getListings(params: IListingParams) {
     try {
-        const { userId } = params;
+        const { userId, roomCount, guestCount, category, bathroomCount, endDate, locationValue, startDate } = params;
 
         let query: any = {};
 
         if (userId) {
             query.userId = userId;
+        }
+        if (category) {
+            query.category = category;
+        }
+        if (roomCount) {
+            query.roomCount = {
+                gte: +roomCount
+            };
+        }
+        if (bathroomCount) {
+            query.bathroomCount = {
+                gte: +bathroomCount
+            };
+        }
+        if (guestCount) {
+            query.guestCount = {
+                gte: +guestCount
+            };
+        }
+        if (startDate && endDate) {
+            query.NOT = {
+                reservations: {
+                    some: {
+                        OR: [
+                            {
+                                endDate: { gte: startDate },
+                                startDate: { lte: startDate }
+                            },
+                            {
+                                endDate: { gte: endDate },
+                                startDate: { lte: endDate }
+                            },
+                        ]
+                    }
+                }
+            };
+        }
+        if (locationValue) {
+            query.locationValue = locationValue;
         }
 
         const listings = await prisma.listing.findMany({
