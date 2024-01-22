@@ -46,14 +46,14 @@ const SignUp = () => {
             </h1>
 
             <div className='flex flex-col gap-3'>
-                <CustomButton
+                {/* <CustomButton
                     btnText='Sign In with Google'
                     onClick={() => { signIn('google'); router.push('/') }}
                     hasIcon
                     Icon={FcGoogle}
                     isVisible
                     variant='ghost'
-                />
+                /> */}
                 {/* <CustomButton
                     btnText='Sign In with Facebook'
                     onClick={() => { }}
@@ -65,11 +65,11 @@ const SignUp = () => {
                 /> */}
             </div>
 
-            <div className='flex gap-2 items-center text-xs text-neutral-500'>
+            {/* <div className='flex gap-2 items-center text-xs text-neutral-500'>
                 <hr className='flex-1' />
                 <span>or sign up by email</span>
                 <hr className='flex-1' />
-            </div>
+            </div> */}
 
             <form className='max-w-sm min-w-[330px] flex flex-col gap-4'>
                 <Input

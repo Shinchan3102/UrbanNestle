@@ -59,7 +59,7 @@ const SignIn = () => {
             </h1>
 
             <div className='flex flex-col gap-3'>
-                <CustomButton
+                {/* <CustomButton
                     btnText='Sign In with Google'
                     onClick={() => { signIn('google'); router.refresh(); router.push('/') }}
                     hasIcon
@@ -67,7 +67,7 @@ const SignIn = () => {
                     isVisible
                     variant='ghost'
                     isLarge
-                />
+                /> */}
                 {/* <CustomButton
                     btnText='Sign In with Facebook'
                     onClick={() => { }}
@@ -79,11 +79,11 @@ const SignIn = () => {
                 /> */}
             </div>
 
-            <div className='flex gap-2 items-center text-xs text-neutral-500'>
+            {/* <div className='flex gap-2 items-center text-xs text-neutral-500'>
                 <hr className='flex-1' />
                 <span>or sign in by email</span>
                 <hr className='flex-1' />
-            </div>
+            </div> */}
 
             <form className='max-w-sm min-w-[330px] flex flex-col gap-4'>
                 <Input
