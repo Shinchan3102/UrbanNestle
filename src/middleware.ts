@@ -10,16 +10,20 @@ export default auth((req) => {
 
     const isApiAuthRoute = nextUrl.pathname.startsWith('/api');
     const isAuthRoute = ['/sign-in', '/sign-up'].includes(nextUrl.pathname);
+    const isProtectedRoute = ['/rent', '/trips', '/favorites', '/reservations', '/properties'].includes(nextUrl.pathname);
 
     if (isApiAuthRoute) return null;
-
+    // console.log(isLoggedIn, isAuthRoute, nextUrl)
     if (isAuthRoute) {
         if (isLoggedIn) {
             return Response.redirect(new URL('/', nextUrl));
         }
         return null;
     }
-
+    if (isProtectedRoute && !isLoggedIn) {
+        return Response.redirect(new URL('/sign-in', nextUrl));
+    }
+    // if(!isAuthRoute && !isProtectedRoute) return Response.redirect(new URL('/', nextUrl));
     return null;
 })
 

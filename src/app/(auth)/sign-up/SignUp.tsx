@@ -31,7 +31,7 @@ const SignUp = () => {
         try {
             const res = await axios.post(`/api/register`, data);
             if (res.status === 200)
-                router.push('/');
+                router.push('/sign-in');
         } catch (error: any) {
             toast.error(`Something went wrong ${error?.message}`)
         } finally {

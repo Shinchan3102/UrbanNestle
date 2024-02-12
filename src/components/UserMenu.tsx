@@ -9,6 +9,7 @@ import Link from "next/link";
 import { menuItems } from "@/utils/constants";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 interface Props {
     currentUser?: User | null;
@@ -25,6 +26,7 @@ const UserMenu = ({ currentUser }: Props) => {
 
     const onRent = useCallback(() => {
         if (!currentUser) {
+            toast.error('Please sign in to continue');
             return router.push('/sign-in');
         }
 
